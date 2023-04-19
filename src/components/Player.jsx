@@ -7,7 +7,6 @@ import {
   setCurrentSong,
   randomSong,
 } from "../store/audioSlice";
-import data from "../audios/110.mp3";
 
 const Player = () => {
   const audioList = useSelector((state) => state.audio.audioList);
@@ -134,6 +133,7 @@ const Player = () => {
 
           <audio
             id="audio"
+      
             src={currentSong?.audioFile}
             ref={audioRef}
             onEnded={handleEnded}
@@ -150,12 +150,13 @@ const Player = () => {
                 }`}
                 onClick={() => {
                   dispatch(setCurrentSong(audio));
-                  if (isPlaying) {
-                    audioRef.current.pause();
-                  } else {
-                    audioRef.current.play();
-                  }
-                  setIsPlaying(!isPlaying);
+                  togglePlay();
+                  // if (isPlaying) {
+                  //   audioRef.current.pause();
+                  // } else {
+                  // audioRef.current.play();
+                  // }
+                  // setIsPlaying(!isPlaying);
                 }}
               >
                 <div className="thumb">

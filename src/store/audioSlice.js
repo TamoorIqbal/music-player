@@ -33,22 +33,54 @@ export const audioSlice = createSlice({
 
       state.currentSong = initialState.audioList[currentIndex + 1];
     },
-
-    backwardSong: (state, action) => {
-      //   console.log("action.payload:", action.payload);
-      // console.log("audioList:", initialState.audioList);
-
+    forwardSong: (state, action) => {
       const currentIndex = initialState.audioList.findIndex(
         (song) => song === action.payload
       );
-      if (
-        currentIndex === -1 ||
-        currentIndex === initialState.audioList.length - 1
-      ) {
+
+      // If the current song is not found in the audioList, return
+      if (currentIndex === -1) {
         return;
       }
 
-      state.currentSong = initialState.audioList[currentIndex - 1];
+      // Calculate the next index in the list, wrapping around to the beginning if at the end
+      const nextIndex = (currentIndex + 1) % initialState.audioList.length;
+
+      state.currentSong = state.audioList[nextIndex];
+    },
+
+    // backwardSong: (state, action) => {
+    //   //   console.log("action.payload:", action.payload);
+    //   // console.log("audioList:", initialState.audioList);
+
+    //   const currentIndex = initialState.audioList.findIndex(
+    //     (song) => song === action.payload
+    //   );
+    //   if (
+    //     currentIndex === -1 ||
+    //     currentIndex === initialState.audioList.length - 1
+    //   ) {
+    //     return;
+    //   }
+
+    //   state.currentSong = initialState.audioList[currentIndex - 1];
+    // },
+    backwardSong: (state, action) => {
+      const currentIndex = initialState.audioList.findIndex(
+        (song) => song === action.payload
+      );
+
+      // If the current song is not found in the audioList, return
+      if (currentIndex === -1) {
+        return;
+      }
+
+      // Calculate the previous index in the list, wrapping around to the end if at the beginning
+      const prevIndex =
+        (currentIndex - 1 + initialState.audioList.length) %
+        initialState.audioList.length;
+
+      state.currentSong = initialState.audioList[prevIndex];
     },
     randomSong: (state, action) => {
       console.log("state.audioList.length", state.audioList.length);
