@@ -18,27 +18,38 @@ const Player = () => {
   const [isRepeat, setIsRepeat] = useState(false);
   // const [isRandom, setIsRandom] = useState(false);
   const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
+    if (currentSong) {
+      isPlaying ? audioRef.current.pause() : audioRef.current.play();
+      setIsPlaying(!isPlaying);
     } else {
-      audioRef.current.play();
+      alert("Please select a song");
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleEnded = () => {
     // Logic for what to do when the song ends
-    console.log(isRepeat);
     if (isRepeat) {
       audioRef.current.currentTime = 0;
       audioRef.current.play();
+    } else {
+      handleForwardClick();
+      // audioRef.current.play();
     }
   };
   const handleBackwardClick = () => {
-    dispatch(backwardSong(currentSong));
+    if (currentSong) {
+      dispatch(backwardSong(currentSong));
+    } else {
+      alert("Please select a song");
+    }
   };
+
   const handleForwardClick = () => {
-    dispatch(forwardSong(currentSong));
+    if (currentSong) {
+      dispatch(forwardSong(currentSong));
+    } else {
+      alert("Please select a song");
+    }
   };
 
   const toggleRepeat = () => {
@@ -56,6 +67,13 @@ const Player = () => {
     // console.log("newTime", newTime);
     audioRef.current.currentTime = newTime;
   };
+  useEffect(() => {
+    if (currentSong) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  }, [currentSong]);
+
   useEffect(() => {
     const audio = audioRef.current;
     audio.addEventListener("timeupdate", () => {
@@ -80,6 +98,7 @@ const Player = () => {
       <div className="player">
         <div className="dashboard">
           <header>
+            <h3>𒆜🅲🆁🅴🅰🆃🅴🅳  🅱🆈  🆃🅰🅼🅾🅾🆁𒆜</h3>
             <h4>Now playing:</h4>
             <h2>{currentSong ? currentSong.name : "No song selected"}</h2>
           </header>
@@ -133,7 +152,6 @@ const Player = () => {
 
           <audio
             id="audio"
-      
             src={currentSong?.audioFile}
             ref={audioRef}
             onEnded={handleEnded}
@@ -150,17 +168,32 @@ const Player = () => {
                 }`}
                 onClick={() => {
                   dispatch(setCurrentSong(audio));
-                  togglePlay();
-                  // if (isPlaying) {
-                  //   audioRef.current.pause();
-                  // } else {
-                  // audioRef.current.play();
-                  // }
-                  // setIsPlaying(!isPlaying);
+
+                  if (currentSong) {
+                    isPlaying
+                      ? audioRef.current.pause()
+                      : audioRef.current.play();
+                    setIsPlaying(!isPlaying);
+                  }
                 }}
               >
                 <div className="thumb">
-                  <img src={audio.image} alt="Quran Pak" />
+                  <img
+                    // src={audio.image}
+                    src={
+                      audio.name === currentSong?.name && isPlaying
+                        ? ""
+                        : audio.image
+                    }
+                  />
+                  <div className="toggle-play">
+                    {audio.name === currentSong?.name &&
+                      (isPlaying ? (
+                        <i className="fa-solid fa-pause"></i>
+                      ) : (
+                        <i className="fas fa-play icon-play"></i>
+                      ))}
+                  </div>
                 </div>
                 <div className="body">
                   <h3 className="title">{audio.name}</h3>

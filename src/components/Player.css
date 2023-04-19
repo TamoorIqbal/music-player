@@ -41,6 +41,7 @@ html {
   background-color: #fff;
   position: fixed;
   top: 0;
+  z-index: 1;
   width: 100%;
   max-width: 480px;
   border-bottom: 1px solid #ebebeb;
@@ -76,6 +77,19 @@ header h2 {
   background-color: #333;
   background-size: cover;
   margin: auto;
+}
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.toggle-play {
+  position: absolute;
+  font-size: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* CONTROL */
@@ -137,7 +151,7 @@ header h2 {
 
 /* PLAYLIST */
 .playlist {
-  margin-top: 408px;
+  margin-top: 438px;
   padding: 12px 0px;
 }
 
