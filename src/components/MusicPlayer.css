@@ -1,0 +1,112 @@
+/* Music player styles */
+.plyr__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  background-color: #1c1c1c;
+  color: #fff;
+  font-family: sans-serif;
+}
+.control1{
+gap: 15px;
+}
+
+.plyr-control-left {
+  display: flex;
+  align-items: center;
+}
+
+.plyr__poster {
+  /* width: 50px;
+    height: 50px; */
+  background-size: cover;
+  background-position: center center;
+  margin-right: 15px;
+}
+.plyr__poster .thumb img {
+  width: 60px;
+  
+}
+
+.plyr__info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+}
+
+.plyr__title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.plyr__author {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.btn-like {
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+}
+
+.btn-like svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.plyr__control {
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+}
+
+.plyr__control svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.plyr__controls__item {
+  margin-right: 10px;
+}
+
+.icon--not-pressed {
+  display: none;
+}
+
+.label--pressed {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .plyr__controls {
+    height: 60px;
+  }
+
+  .plyr__poster {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .plyr__title {
+    font-size: 12px;
+  }
+
+  .plyr__author {
+    font-size: 10px;
+  }
+
+  .btn-like svg,
+  .plyr__control svg {
+    width: 16px;
+    height: 16px;
+  }
+}
